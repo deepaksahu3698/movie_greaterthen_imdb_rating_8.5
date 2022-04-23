@@ -1,0 +1,42 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search movie</title>
+    <link rel="stylesheet" href="./search.css">
+</head>
+<body>
+    <div id="search">
+        <input type="text" id="in" placeholder="Search the movie here"/>
+        <button onclick="get()">Submit</button>
+    </div>
+  <div id="dis">
+
+  </div>
+   <script>
+    async function get(){
+    var name=document.getElementById("in").value
+    let res=await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e303216a&t=${name}`)
+    let data=await res.json()
+    // console.log(data)
+    var dis_cont=document.getElementById("dis");
+    // data.forEach(e => {
+        var cont_div=document.createElement("div")
+cont_div.setAttribute("id","dis_cont")
+var movie_image=document.createElement("img")
+movie_image.src=data.Poster
+var  movie_title=document.createElement("b")
+movie_title.innerText=data.Title
+var  movie_date=document.createElement("p")
+movie_date.innerText="Release on:-"+data.Year
+var  movie_rate=document.createElement("h6")
+movie_rate.innerText="IMDB:-"+data.imdbRating
+cont_div.append(movie_image,movie_title,movie_date,movie_rate)
+dis_cont.append(cont_div)
+        
+    // });
+    }
+   </script>
+</body>
+</html>
