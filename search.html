@@ -15,14 +15,53 @@
 
   </div>
    <script>
-    async function get(){
+
+
+// var url="https://reqres.in/api/users?page=2"
+
+
+// fetch(url).then(function(res){
+// //    console.log(res)
+// res.json().then(function(res){
+// console.log(res)
+// const data=res.data
+// display(data)
+// })
+
+// })    .catch(function(err){
+// console.log(err)
+// })
+ function get(){
     var name=document.getElementById("in").value
-    let res=await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e303216a&t=${name}`)
-    let data=await res.json()
-    // console.log(data)
+    var url=`http://www.omdbapi.com/?i=tt3896198&apikey=e303216a&t=${name}`
+    fetch(url).then(function(res){
+        
+        res.json().then(function(ress){
+            console.log(ress)
+            if(ress){
+                display(ress)
+
+            }
+            else{
+
+                console.log("not found")
+            }
+        })
+      
+  }).catch(function(err){
+      console.log("uiui"+err)
+  })
+
+
+   
+   
+ function display(data){
+     
+
     var dis_cont=document.getElementById("dis");
-    // data.forEach(e => {
-        var cont_div=document.createElement("div")
+    
+    dis_cont.innerHTML=""
+    var cont_div=document.createElement("div")
 cont_div.setAttribute("id","dis_cont")
 var movie_image=document.createElement("img")
 movie_image.src=data.Poster
@@ -34,6 +73,8 @@ var  movie_rate=document.createElement("h6")
 movie_rate.innerText="IMDB:-"+data.imdbRating
 cont_div.append(movie_image,movie_title,movie_date,movie_rate)
 dis_cont.append(cont_div)
+ }
+   
         
     // });
     }
