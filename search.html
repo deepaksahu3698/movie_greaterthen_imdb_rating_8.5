@@ -39,7 +39,13 @@
         res.json().then(function(ress){
             console.log(ress)
             if(ress){
-                display(ress)
+                // display(ress)
+                if(ress.imdbRating>8.5){
+                    display(ress)
+                }
+                else{
+                    alert("Movie is lessthen 8.5 rating")
+                }
 
             }
             else{
